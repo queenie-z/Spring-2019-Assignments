@@ -6,7 +6,7 @@
 //Date: Jan 31, 2019
 
 #ifndef MATRIX_H
-#define MATRIX_J
+#define MATRIX_H
 #include <iostream>
 
 using namespace std;
@@ -17,7 +17,7 @@ class Matrix
    
    Matrix(int m = 2, int n = 2); //Default constructor. m = n = 2, all values are set to zero.
 
-   void getDimensions(int& m, int& n); //Returns the dimensions of the matrix.
+   void getMxNDimen(int& m, int& n);
 
    int& element(int i, int j);
    const int& constElement(int i, int j) const;
