@@ -16,7 +16,7 @@ class Matrix
   private:
    int rows;
    int cols;
-   int **A;
+   int **thisMatrix;
   
   public:
    
