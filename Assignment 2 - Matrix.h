@@ -22,6 +22,8 @@ class Matrix
    
    Matrix(int m = 2, int n = 2); //Default constructor. m = n = 2, all values are set to zero.
 
+   void getDimen(int& m, int& n);
+  
    int& returnElemAt(int i, int j);
    const int& constElemAt(int i, int j) const;
 
