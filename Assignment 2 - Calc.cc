@@ -16,14 +16,14 @@ int main () {
 
    //Reading in matrices A, B, and C.
    cout << "Now executing A.read():" << endl;
-   A.read();
+   A.assembleMatrix();
    cout << "Now executing B.read():" << endl;
-   B.read();
+   B.assembleMatrix();
    cout << "Now executing C.read():" << endl;
-   C.read();
+   C.assembleMatrix();
    
    //Creating matrix D and initializes all elements of A to D, then all entries of the first column to zero.
-   A.getDimensions(r1, c1);
+   A.getDimen(r1, c1);
    Matrix D(r1, c1);
 
    for(int i = 0; i < r1; i++)
@@ -48,7 +48,7 @@ int main () {
 
    //Executing and printing A + B (without operator overloading).
    cout << "After A.add(B), A is now:" << endl;
-   A.add(B);
+   A.addMatrixOfSameDimen(B);
    A.write();
    cout << endl;
    //Printing matrix B to let user know it has not changed.
@@ -64,8 +64,8 @@ int main () {
 
    //Executing and printing A * C - A (without operator overloading).
    cout << "After E = A.multiply(C) and E.subtract(A), the new product E is: " << endl;
-   E = A.multiply(C);
-   E.subtract(A);
+   E = A.multiplyMatrices(C);
+   E.subtractMatrixOfSameDime(A);
    E.write();
    cout << endl;
 
@@ -82,14 +82,14 @@ int main () {
    
    //Creating matrix F and initialize dimensions to row of A and column of C.
    int r4, r5, c4, c5;
-   A.getDimensions(r4, c4);
-   C.getDimensions(r5, c5);
+   A.getDimen(r4, c4);
+   C.getDimen(r5, c5);
    Matrix F(r4, c5);
 
    //Executing and printing (A + D) * C (without operator overloading).
    cout << "After A.add(D) and F = A.multiply(C), the new product F is: " << endl;
-   A.add(D);
-   F = A.multiply(C);
+   A.addMatrixOfSameDimen(D);
+   F = A.multiplyMatrices(C);
    F.write();
    cout << endl;
    
