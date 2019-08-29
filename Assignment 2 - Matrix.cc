@@ -18,24 +18,22 @@ using namespace std;
 //*************************************************************************************************************
 
 Matrix::Matrix(int m, int n)
-   : rows{m}, cols{n} //initialization list
+   : rows{m}, cols{n} 
 {
-   A = new int *[rows];
+   thisMatrix = new int *[rows];
    for (int i = 0; i < rows; i++) {
  	 
-  	A[i] = new int [cols];
+  	thisMatrix[i] = new int [cols];
 
   	for (int j = 0; j < cols; j++)
-     A[i][j] = 0;
+     thisMatrix[i][j] = 0;
    }
 }
-
 //*************************************************************************************************************
 // Function: Gets dimension of m and n
 // Returns dimension of matrix through reference
 //*************************************************************************************************************
-
-void Matrix::getDimensions(int& m, int& n)
+void Matrix::getDimen(int& m, int& n)
 {
    m = rows;
    n = cols;
@@ -43,16 +41,15 @@ void Matrix::getDimensions(int& m, int& n)
 
 //*************************************************************************************************************
 // Function: This function takes in the indices i and j and returns a reference to that element
-//
 //*************************************************************************************************************
-int& Matrix::element(int i, int j)
+int& Matrix::returnElemAt(int i, int j)
 {
    assert(i <= rows);
    assert(j <= cols);
  	 
    // int *p = new int;
 
-   return A[i][j];
+   return thisMatrix[i][j];
 
 }
 
@@ -60,18 +57,18 @@ int& Matrix::element(int i, int j)
 // Function:
 //
 //*************************************************************************************************************
-const int& Matrix::constElement(int i, int j) const
+const int& Matrix::constElemAt(int i, int j) const
 {
    assert(i <= rows);
    assert(j <= cols);
    
-   return A[i][j];
+   return thisMatrix[i][j];
 }
 
 //*************************************************************************************************************
 // Function: This function adds two matrices together and changes A
 //*************************************************************************************************************
-void Matrix::add(const Matrix& M)
+void Matrix::addMatrixOfSameDimen(const Matrix& M)
 {
    assert(rows == M.rows);
    assert(cols == M.cols);
@@ -80,13 +77,13 @@ void Matrix::add(const Matrix& M)
  	 
   	for(int j = 0; j < cols; j++)
 
-     A[i][j] += M.A[i][j];
+     thisMatrix[i][j] += M.thisMatrix[i][j];
 }
 
 //*************************************************************************************************************
 // Function: This function subtracts M from A and changes A
 //*************************************************************************************************************
-void Matrix::subtract(const Matrix& M)
+void Matrix::subtractMatrixOfSameDime(const Matrix& M)
 {
    assert(rows == M.rows);
    assert(cols == M.cols);
@@ -95,14 +92,14 @@ void Matrix::subtract(const Matrix& M)
  	 
   	for(int j = 0; j < cols; j++)
 
-     A[i][j] -= M.A[i][j];
+     thisMatrix[i][j] -= M.thisMatrix[i][j];
 }
 
 //*************************************************************************************************************
 // Function: This function multiplies two matrices of compatible dimensions together, and returns their product
 // Compatible dimensions: If A is p x q and B is q x r, their product is C with dimensions of p x r
 //*************************************************************************************************************
-Matrix Matrix::multiply(const Matrix& B) const
+Matrix Matrix::multiplyMatrices(const Matrix& B) const
 {
    assert(cols == B.rows);
 
@@ -114,7 +111,7 @@ Matrix Matrix::multiply(const Matrix& B) const
 
      for(int k = 0; k < cols; k++)
 
-    	C.element(i,j) += constElement(i,k) * B.constElement(k,j);
+    	C.returnElemAt(i,j) += constElemAt(i,k) * B.constElemAt(k,j);
    
    
    return C;
@@ -133,19 +130,19 @@ void Matrix::read()
  	 
   	cout << "Enter the numbers in your matrix indicated." << endl;
  	 
-  	A = new int *[rows];
+  	thisMatrix = new int *[rows];
    
   	for(int i = 0; i < rows; i++) {
  	 
-     A[i] = new int [cols];
+     thisMatrix[i] = new int [cols];
    
      for(int j = 0; j < cols; j++) {
 
-    	cout << "(" << i << "," << j << "): ";
-    	cin >> A[i][j];
-     }
-  	}
-   }
+      cout << "(" << i << "," << j << "): ";
+    	cin >> thisMatrix[i][j];
+       }
+   	}
+    }
 
    else
   	cout << "Dimensions are out of bounds (must be positive), please try again." << endl;
@@ -168,7 +165,7 @@ void Matrix::write() const
     	count++;
      }
     
-     cout << setw(4) << A[i][j];
+     cout << setw(4) << thisMatrix[i][j];
   	}
    cout << endl;
 }
